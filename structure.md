@@ -8,7 +8,7 @@ Modellizzare la struttura di una tabella per memorizzare tutti i dati riguardant
 - FATTO, ogni Corso prevede più appelli d'Esame;
 - FATTO, ogni Studente è iscritto ad un solo Corso di Laurea;
 - FATTO, ogni Studente può iscriversi a più appelli di Esame;
-- per ogni appello d'Esame a cui lo Studente ha partecipato, è necessario memorizzare il voto ottenuto, anche se non sufficiente Pensiamo a quali entità (tabelle) creare per il nostro database e cerchiamo poi di stabilirne le relazioni.
+- FATTO, per ogni appello d'Esame a cui lo Studente ha partecipato, è necessario memorizzare il voto ottenuto, anche se non sufficiente Pensiamo a quali entità (tabelle) creare per il nostro database e cerchiamo poi di stabilirne le relazioni.
 
 ## University [Es->UniversitàdegliStudidiCa'Foscari]
 ID:                                         PK                      NOTNULL, UNIQUE, INDEX, AI
@@ -41,6 +41,7 @@ Course_id:                                  <Courses (* - *)>
 ## Courses - [Es->CorsiSingoli_Appl.WebforTourism]
 ID:                                         PK                      NOTNULL, UNIQUE, INDEX, AI
 Name:           [Appl.WebforTourism]        VARCHARD(30)            NOTNULL, UNIQUE, INDEX
+Hours:          [600h]                      VARCHARD(5)             NOTNULL
 Teacher_id:                                 <Teachers (* - *)>
 - UN corso singolo può avere PIU' insegnanti, UN insegnante può avere PIU' corsi singoli - MANY TO MANY.
 Exam_session_id:                            <Exam_sessions (* - *)>
@@ -66,12 +67,12 @@ Teacher_id:                                 <Teachers (* - *)>
 
 ## Students
 ID:                                         PK                      NOTNULL, UNIQUE, INDEX, AI
-Name:                   [Fabio]             VARCHARD(30)            NOTNULL
+Name:                   [Fabio]             VARCHARD(15)            NOTNULL
 Lastname:               [Rossi]             VARCHARD(30)            NOTNULL
 Matricola:              [223454]            CHARD(6)                NOTNULL, UNIQUE
 Type_degree_id:                             <Degrees (1 - *)>
 - UNO studente può avere UN solo corso di laurea, UN corso di laurea può avere PIU' studenti - ONE TO MANY.
-Time_exam_sessions_id:                      <Exam_sessions (* - *)>
+Exam_session_id:                            <Exam_sessions (* - *)>
 - UNO studente può iscriversi a PIU' appelli, UN appello può avere PIU' studenti iscritti - MANY TO MANY.
 ResultExam_id:                              <ResultExam (* - 1)>
 - UNO studente può avere PIU' risultati, UN risultato di esame può avere UN solo studente - MANY TO ONE.
